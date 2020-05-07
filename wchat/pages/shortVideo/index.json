@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText":"短视频",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "scroll-video": "../../components/scroll-video",
+    "components_head":"../../components/head"
+  }
+}

@@ -1,0 +1,11 @@
+/* pages/components/head.wxss */
+.head_back_view {
+  position:absolute;
+  margin-left: 20rpx;
+  margin-top: 60rpx;
+  z-index: 99999;
+}
+
+.back_text {
+  color: white;
+}

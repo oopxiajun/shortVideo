@@ -1,0 +1,27 @@
+<!--components/scroll-video.wxml-->
+<view class='video-container'>
+	<view class='video-scroll-container' animation="{{scrollAnimate}}">
+		<view class='video-scroll-item' bindtouchstart='onTouchStart' bindtouchend='onTouchEnd' 
+    wx:for-item="items" wx:for-index="idx" data-videoidx="{{idx}}" wx:key="{{items.pid}}" wx:for="{{videoList}}">
+			<block wx:if="{{items.video_is_player}}">
+				<block wx:if="{{playerType==='video'}}">
+					<video-button-bar bind:buttonhandle="buttonhandle" video="{{items}}" index="{{idx}}"></video-button-bar>
+					<video 
+          class='video-player' 
+          controls='{{true}}' 
+          autoplay='{{true}}' 
+          loop='{{true}}' 
+          poster='{{items.coverImage}}' 
+          src="{{items.playUrl}}" 
+          show-fullscreen-btn="{{false}}" 
+          show-play-btn="{{true}}" 
+          play-btn-position="center"
+          bindplay="bindplay"
+          data-pid="{{items.pid}}"       
+          title="{{items.description}}"   
+          object-fit="{{fitType}}"></video>
+				</block> 
+			</block>
+		</view>
+	</view>
+</view>

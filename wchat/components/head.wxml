@@ -1,0 +1,4 @@
+<!--pages/components/head.wxml--> 
+<cover-view class="head_back_view" bindtap="back">
+	<cover-view class="back_text">{{'<'}}返回</cover-view>
+</cover-view>

@@ -1,0 +1,26 @@
+<!--components/video-button-bar.wxml-->
+	<cover-view class="icon-container">
+		<cover-view class="cover-view-item" bindtap='toolBarButton' data-buttontype="1" data-buttonname="点赞" data-itemid="{{video.pid}}" data-index="{{index}}">
+			<cover-image wx:if="{{video.userLikeStatus==1}}" class="video-icon" src='../images/faved.png' />
+			<cover-image wx:else class="video-icon" src='../images/fav.png' />
+		</cover-view>
+		<cover-view class="wj_color ">{{video.likeCount}}</cover-view>
+
+		<cover-view class="cover-view-item" bindtap='toolBarButton' data-buttontype="2" data-buttonname="消息" data-itemid="{{video.pid}}" data-index="{{index}}">
+			<cover-image class="video-icon" src='../images/msg.png' />
+		</cover-view>
+		<cover-view class="wj_color ">{{video.commentCount}}</cover-view>
+		<cover-view class="cover-view-item_wj" bindtap='toolBarButton' data-buttontype="3" data-buttonname="分享" data-itemid="{{video.pid}}" data-index="{{index}}">
+			<cover-image class="video-icon" src='../images/share.png' />
+		</cover-view>
+	</cover-view>
+
+	<cover-view class="wj_container">
+		<cover-view class="wj_m_b">
+			<cover-view class="wj-view-item fr" >
+				<cover-image class="wj_icon" src="{{video.avatarUrl}}" />
+			</cover-view>
+			<cover-view class="wj_tx fr">{{video.nickName}}</cover-view>
+		</cover-view>
+		<cover-view class="weui-media-box__desc">{{video.description}}</cover-view>
+	</cover-view>
