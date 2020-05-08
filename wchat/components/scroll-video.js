@@ -38,7 +38,7 @@ Component({
     playerType: {
       type: String,
       value: 'video',
-      observer: function (newVal, oldVal) {}
+      observer: function (newVal, oldVal) { }
     }
 
   },
@@ -78,13 +78,13 @@ Component({
    */
   methods: {
     //视频开始播放时调用函数
-    bindplay: function (params) { 
+    bindplay: function (params) {
       //播放时修改播放量    
-    var enterTime = util.formatTime(new Date());
+      var enterTime = util.formatTime(new Date());
 
-    wx.request({
-      url: app.serverUrl + 'shortvideo/play?pid=' + params.target.dataset.pid + "&upid=" + app.globalData.userInfo.pid + "&enterTime=" + enterTime,
-    })
+      wx.request({
+        url: app.serverUrl + 'shortvideo/play?pid=' + params.target.dataset.pid + "&upid=" + app.globalData.userInfo.pid + "&enterTime=" + enterTime,
+      })
     },
 
 
@@ -117,7 +117,7 @@ Component({
       videoidx = parseInt(videoidx)
       console.log(videoidx);
       let thresholdValue = this.properties.thresholdValue;
- 
+
 
       const {
         startY
@@ -151,22 +151,38 @@ Component({
       } else {
         let abschangeY = Math.abs(changeY);
         if (abschangeY >= thresholdValue) {
-          if (videoidx + 1 === this.data.videoSize) {
 
+          let btm_height = -((videoidx + 1) * this.data.screenHeight);
+          this.animation.translateY(btm_height).step();
+
+          if (videoidx + 1 === this.data.videoSize) {
+            var self = this;
+            console.log("newindex-------------1:" + videoidx);
             this.triggerEvent('swipeToEnd', {
               oldindex: videoidx + 1,
               newindex: videoidx,
-              playerType: this.properties.playerType
+              playerType: this.properties.playerType,
+              callback: function () {
+                console.log("callback:"+(videoidx + 1))
+                self.triggerEvent('swipeUpper', {
+                  oldindex: videoidx,
+                  newindex: videoidx + 1,
+                  playerType: self.properties.playerType
+                });
+                console.log('向上滑动,往下切换视频');
+                self.setData({
+                  scrollAnimate: self.animation.export(),
+                  videoidx: videoidx,
+                });
+              }
             });
             return false;
           }
-          let btm_height = -((videoidx + 1) * this.data.screenHeight);
           this.triggerEvent('swipeUpper', {
             oldindex: videoidx,
             newindex: videoidx + 1,
             playerType: this.properties.playerType
           });
-          this.animation.translateY(btm_height).step();
           console.log('向上滑动,往下切换视频');
           this.setData({
             scrollAnimate: this.animation.export(),
